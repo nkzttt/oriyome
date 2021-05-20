@@ -3,7 +3,7 @@ import 'ress';
 import Title from './Title';
 
 const App: React.FC = () => {
-  return <Title title="App" />;
+  return <Title title="オリ嫁ブランディング" />;
 };
 
 export default App;
