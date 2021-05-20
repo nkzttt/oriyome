@@ -1,8 +1,9 @@
 import React from 'react';
 import 'ress';
+import Title from './Title';
 
-function App() {
-  return <div>App</div>;
-}
+const App: React.FC = () => {
+  return <Title title="App" />;
+};
 
 export default App;
