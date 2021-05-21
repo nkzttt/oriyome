@@ -1,3 +1,4 @@
+export const SIZE_FONT_XX_LARGE = 24;
 export const SIZE_FONT_LARGE = 18;
 export const SIZE_FONT_MEDIUM = 16;
 

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import 'ress';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+import { CheckCircle } from '@styled-icons/boxicons-regular/CheckCircle';
 import baseTheme from '../../theme/gray.json';
-import { createSpaceSize } from '../../lib/styleUtils';
+import { createSpaceSize, SIZE_FONT_XX_LARGE } from '../../lib/styleUtils';
 
 type Theme = typeof baseTheme;
 
@@ -34,16 +35,25 @@ const StyledComingSoon = styled.div`
   height: 100%;
   align-items: center;
   justify-content: center;
+  color: ${baseTheme.thin};
+  font-size: ${SIZE_FONT_XX_LARGE}px;
+  transform: rotate(-20deg);
 `;
 
-type StyledImageInCardProps = { leftRatio: number; isHover: boolean };
+type StyledImageInCardProps = {
+  leftRatio: number;
+  isHover: boolean;
+  selected: boolean;
+};
 const StyledImageInCard = styled.img<StyledImageInCardProps>`
   position: absolute;
   top: 0;
   left: ${({ leftRatio }) => leftRatio || -50}%;
   width: auto;
   height: 100%;
-  filter: grayscale(${({ isHover }) => (isHover ? 0 : 1)});
+  filter: grayscale(
+    ${({ isHover, selected }) => (isHover || selected ? 0 : 1)}
+  );
   transition: filter 350ms linear;
 `;
 
@@ -51,7 +61,11 @@ const BORDER_PROPERTIES = {
   size: 3,
   transitionTime: 500,
 };
-type StyledBorderInCardProps = { characterTheme: Theme; isHover: boolean };
+type StyledBorderInCardProps = {
+  characterTheme: Theme;
+  isHover: boolean;
+  selected: boolean;
+};
 const StyledBorderInCardLeft = styled.div<StyledBorderInCardProps>`
   width: ${BORDER_PROPERTIES.size}px;
   height: 100%;
@@ -60,7 +74,9 @@ const StyledBorderInCardLeft = styled.div<StyledBorderInCardProps>`
   left: 0;
   background-color: ${({ characterTheme, isHover }) =>
     (isHover ? characterTheme : baseTheme).thick};
-  transform: translateY(${({ isHover }) => (isHover ? -100 : 100)}%);
+  transform: translateY(
+    ${({ isHover, selected }) => (isHover || selected ? -100 : 100)}%
+  );
   transition: transform ${BORDER_PROPERTIES.transitionTime}ms linear;
 `;
 const StyledBorderInCardRight = styled.div<StyledBorderInCardProps>`
@@ -71,7 +87,9 @@ const StyledBorderInCardRight = styled.div<StyledBorderInCardProps>`
   right: 0;
   background-color: ${({ characterTheme, isHover }) =>
     (isHover ? characterTheme : baseTheme).thick};
-  transform: translateY(${({ isHover }) => (isHover ? 100 : -100)}%);
+  transform: translateY(
+    ${({ isHover, selected }) => (isHover || selected ? 100 : -100)}%
+  );
   transition: transform ${BORDER_PROPERTIES.transitionTime}ms linear;
 `;
 const StyledBorderInCardTop = styled.div<StyledBorderInCardProps>`
@@ -82,7 +100,9 @@ const StyledBorderInCardTop = styled.div<StyledBorderInCardProps>`
   left: 0;
   background-color: ${({ characterTheme, isHover }) =>
     (isHover ? characterTheme : baseTheme).thick};
-  transform: translateX(${({ isHover }) => (isHover ? 100 : -100)}%);
+  transform: translateX(
+    ${({ isHover, selected }) => (isHover || selected ? 100 : -100)}%
+  );
   transition: transform ${BORDER_PROPERTIES.transitionTime}ms linear;
 `;
 const StyledBorderInCardBottom = styled.div<StyledBorderInCardProps>`
@@ -93,8 +113,51 @@ const StyledBorderInCardBottom = styled.div<StyledBorderInCardProps>`
   left: 0;
   background-color: ${({ characterTheme, isHover }) =>
     (isHover ? characterTheme : baseTheme).thick};
-  transform: translateX(${({ isHover }) => (isHover ? -100 : 100)}%);
+  transform: translateX(
+    ${({ isHover, selected }) => (isHover || selected ? -100 : 100)}%
+  );
   transition: transform ${BORDER_PROPERTIES.transitionTime}ms linear;
+`;
+
+const StyledSelectedCenteringContainer = styled.div`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+const fadeInOut = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  33%, 66% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+`;
+const StyledSelectedContainer = styled.div`
+  text-align: center;
+  animation: ${fadeInOut} 1200ms ease-in-out forwards;
+`;
+type StyledSelectedIconProps = { characterTheme: Theme };
+const StyledSelectedIcon = styled(CheckCircle)<StyledSelectedIconProps>`
+  margin: 0 auto;
+  color: ${({ characterTheme }) => characterTheme.thinner};
+  filter: drop-shadow(0 0 3px ${({ characterTheme }) => characterTheme.thin});
+`;
+type StyledSelectedLabelProps = { characterTheme: Theme };
+const StyledSelectedLabel = styled.p<StyledSelectedLabelProps>`
+  color: ${({ characterTheme }) => characterTheme.thinner};
+  font-size: ${SIZE_FONT_XX_LARGE}px;
+  filter: drop-shadow(0 0 3px ${({ characterTheme }) => characterTheme.thin});
 `;
 
 type Props =
@@ -105,6 +168,7 @@ type Props =
     });
 const CharacterCard: React.FC<Props> = (props) => {
   const [isHover, setHover] = useState(false);
+  const [selected, setSelected] = useState(false);
   if ('isComingSoon' in props) {
     return (
       <StyledCard isComingSoon>
@@ -119,28 +183,48 @@ const CharacterCard: React.FC<Props> = (props) => {
     <StyledCard
       onMouseOver={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
+      onClick={() => setSelected(true)}
     >
       <StyledImageInCard
         {...htmlImgProperties}
         leftRatio={leftRatio}
         isHover={isHover}
+        selected={selected}
       />
       <StyledBorderInCardLeft
         characterTheme={characterTheme}
         isHover={isHover}
+        selected={selected}
       />
       <StyledBorderInCardRight
         characterTheme={characterTheme}
         isHover={isHover}
+        selected={selected}
       />
       <StyledBorderInCardTop
         characterTheme={characterTheme}
         isHover={isHover}
+        selected={selected}
       />
       <StyledBorderInCardBottom
         characterTheme={characterTheme}
         isHover={isHover}
+        selected={selected}
       />
+      {selected && (
+        <StyledSelectedCenteringContainer>
+          <StyledSelectedContainer>
+            <StyledSelectedIcon
+              characterTheme={characterTheme}
+              width={50}
+              height={50}
+            />
+            <StyledSelectedLabel characterTheme={characterTheme}>
+              selected
+            </StyledSelectedLabel>
+          </StyledSelectedContainer>
+        </StyledSelectedCenteringContainer>
+      )}
     </StyledCard>
   );
 };
