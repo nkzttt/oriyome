@@ -1,10 +1,8 @@
 import React from 'react';
 import 'ress';
 import './App.css';
-import Title from './Title';
+import ChooseCharacter from './components/ChooseCharacter';
 
-const App: React.FC = () => {
-  return <Title title="オリ嫁ブランディング" />;
-};
+const App: React.FC = () => <ChooseCharacter />;
 
 export default App;
