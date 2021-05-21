@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import 'ress';
 import styled from 'styled-components';
-import theme from '../../theme/gray.json';
+import baseTheme from '../../theme/gray.json';
 import { createSpaceSize } from '../../lib/styleUtils';
+
+type Theme = typeof baseTheme;
 
 const CARD_WIDTH = 150;
 type StyledCardProps = { isComingSoon?: boolean };
@@ -11,7 +13,7 @@ const StyledCard = styled.div<StyledCardProps>`
   height: 500px;
   position: relative;
   margin: 0 ${createSpaceSize(3)}px;
-  background-color: ${theme.thinner};
+  background-color: ${baseTheme.thinner};
   cursor: ${({ isComingSoon }) => (isComingSoon ? 'auto' : 'pointer')};
   overflow: hidden;
   &:first-child {
@@ -49,15 +51,15 @@ const BORDER_PROPERTIES = {
   size: 3,
   transitionTime: 500,
 };
-type StyledBorderInCardProps = { isHover: boolean };
+type StyledBorderInCardProps = { characterTheme: Theme; isHover: boolean };
 const StyledBorderInCardLeft = styled.div<StyledBorderInCardProps>`
   width: ${BORDER_PROPERTIES.size}px;
   height: 100%;
   position: absolute;
   top: 0;
   left: 0;
-  // TODO: キャラクターの色を決める
-  background-color: ${({ isHover }) => (isHover ? 'purple' : 'gray')};
+  background-color: ${({ characterTheme, isHover }) =>
+    (isHover ? characterTheme : baseTheme).thick};
   transform: translateY(${({ isHover }) => (isHover ? -100 : 100)}%);
   transition: transform ${BORDER_PROPERTIES.transitionTime}ms linear;
 `;
@@ -67,8 +69,8 @@ const StyledBorderInCardRight = styled.div<StyledBorderInCardProps>`
   position: absolute;
   top: 0;
   right: 0;
-  // TODO: キャラクターの色を決める
-  background-color: ${({ isHover }) => (isHover ? 'purple' : 'gray')};
+  background-color: ${({ characterTheme, isHover }) =>
+    (isHover ? characterTheme : baseTheme).thick};
   transform: translateY(${({ isHover }) => (isHover ? 100 : -100)}%);
   transition: transform ${BORDER_PROPERTIES.transitionTime}ms linear;
 `;
@@ -78,8 +80,8 @@ const StyledBorderInCardTop = styled.div<StyledBorderInCardProps>`
   position: absolute;
   top: 0;
   left: 0;
-  // TODO: キャラクターの色を決める
-  background-color: ${({ isHover }) => (isHover ? 'purple' : 'gray')};
+  background-color: ${({ characterTheme, isHover }) =>
+    (isHover ? characterTheme : baseTheme).thick};
   transform: translateX(${({ isHover }) => (isHover ? 100 : -100)}%);
   transition: transform ${BORDER_PROPERTIES.transitionTime}ms linear;
 `;
@@ -89,8 +91,8 @@ const StyledBorderInCardBottom = styled.div<StyledBorderInCardProps>`
   position: absolute;
   bottom: 0;
   left: 0;
-  // TODO: キャラクターの色を決める
-  background-color: ${({ isHover }) => (isHover ? 'purple' : 'gray')};
+  background-color: ${({ characterTheme, isHover }) =>
+    (isHover ? characterTheme : baseTheme).thick};
   transform: translateX(${({ isHover }) => (isHover ? -100 : 100)}%);
   transition: transform ${BORDER_PROPERTIES.transitionTime}ms linear;
 `;
@@ -99,6 +101,7 @@ type Props =
   | { isComingSoon: true }
   | (React.ImgHTMLAttributes<HTMLImageElement> & {
       leftRatio: number;
+      characterTheme: Theme;
     });
 const CharacterCard: React.FC<Props> = (props) => {
   const [isHover, setHover] = useState(false);
@@ -111,7 +114,7 @@ const CharacterCard: React.FC<Props> = (props) => {
       </StyledCard>
     );
   }
-  const { leftRatio, ...htmlImgProperties } = props;
+  const { leftRatio, characterTheme, ...htmlImgProperties } = props;
   return (
     <StyledCard
       onMouseOver={() => setHover(true)}
@@ -122,10 +125,22 @@ const CharacterCard: React.FC<Props> = (props) => {
         leftRatio={leftRatio}
         isHover={isHover}
       />
-      <StyledBorderInCardLeft isHover={isHover} />
-      <StyledBorderInCardRight isHover={isHover} />
-      <StyledBorderInCardTop isHover={isHover} />
-      <StyledBorderInCardBottom isHover={isHover} />
+      <StyledBorderInCardLeft
+        characterTheme={characterTheme}
+        isHover={isHover}
+      />
+      <StyledBorderInCardRight
+        characterTheme={characterTheme}
+        isHover={isHover}
+      />
+      <StyledBorderInCardTop
+        characterTheme={characterTheme}
+        isHover={isHover}
+      />
+      <StyledBorderInCardBottom
+        characterTheme={characterTheme}
+        isHover={isHover}
+      />
     </StyledCard>
   );
 };

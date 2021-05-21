@@ -2,6 +2,7 @@ import React from 'react';
 import 'ress';
 import styled from 'styled-components';
 import { createSpaceSize } from '../../lib/styleUtils';
+import themeAim from '../../theme/aim.json';
 import imageAim from '../../images/choose/aim.jpg';
 import CharacterCard from './CharacterCard';
 
@@ -10,7 +11,7 @@ const StyledContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: ${createSpaceSize(10)}px;
+  padding-top: ${createSpaceSize(5)}px;
 `;
 
 const StyledCardContainer = styled.div`
@@ -21,7 +22,12 @@ const ChooseCharacter: React.FC = () => {
   return (
     <StyledContainer>
       <StyledCardContainer>
-        <CharacterCard leftRatio={-80} src={imageAim} alt="愛夢" />
+        <CharacterCard
+          leftRatio={-80}
+          characterTheme={themeAim}
+          src={imageAim}
+          alt="愛夢"
+        />
         <CharacterCard isComingSoon />
         <CharacterCard isComingSoon />
       </StyledCardContainer>
