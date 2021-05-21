@@ -25,12 +25,14 @@ const StyledTitle = styled.h1`
   font-weight: normal;
 `;
 
-const App: React.FC = () => (
-  <div>
-    <GlobalStyle />
-    <StyledTitle>オリ嫁ブランディング</StyledTitle>
-    <ChooseCharacter />
-  </div>
-);
+const App: React.FC = () => {
+  return (
+    <div>
+      <GlobalStyle />
+      <StyledTitle>オリ嫁ブランディング</StyledTitle>
+      <ChooseCharacter onSelected={(character) => console.log(character)} />
+    </div>
+  );
+};
 
 export default App;

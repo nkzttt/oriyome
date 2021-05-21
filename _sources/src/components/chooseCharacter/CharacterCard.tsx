@@ -165,6 +165,7 @@ type Props =
   | (React.ImgHTMLAttributes<HTMLImageElement> & {
       leftRatio: number;
       characterTheme: Theme;
+      onSelected: () => void;
     });
 const CharacterCard: React.FC<Props> = (props) => {
   const [isHover, setHover] = useState(false);
@@ -178,7 +179,7 @@ const CharacterCard: React.FC<Props> = (props) => {
       </StyledCard>
     );
   }
-  const { leftRatio, characterTheme, ...htmlImgProperties } = props;
+  const { leftRatio, characterTheme, onSelected, ...htmlImgProperties } = props;
   return (
     <StyledCard
       onMouseOver={() => setHover(true)}
@@ -213,7 +214,7 @@ const CharacterCard: React.FC<Props> = (props) => {
       />
       {selected && (
         <StyledSelectedCenteringContainer>
-          <StyledSelectedContainer>
+          <StyledSelectedContainer onAnimationEnd={onSelected}>
             <StyledSelectedIcon
               characterTheme={characterTheme}
               width={50}
