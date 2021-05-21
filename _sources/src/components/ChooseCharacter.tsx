@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'ress';
 import styled from 'styled-components';
 import theme from '../theme/gray.json';
@@ -38,26 +38,82 @@ const StyledCard = styled.div`
   }
 `;
 
-type StyledImageInCardProps = { leftRatio: number };
+type StyledImageInCardProps = { leftRatio: number; isHover: boolean };
 const StyledImageInCard = styled.img<StyledImageInCardProps>`
   position: absolute;
   top: 0;
   left: ${({ leftRatio }) => leftRatio || -50}%;
   width: auto;
   height: 100%;
-  filter: grayscale(1);
+  filter: grayscale(${({ isHover }) => (isHover ? 0 : 1)});
   transition: filter 350ms linear;
-  &:hover {
-    filter: grayscale(0);
-  }
+`;
+
+type StyledBorderInCardProps = { isHover: boolean };
+const StyledBorderInCardLeft = styled.div<StyledBorderInCardProps>`
+  width: 2px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  // TODO
+  background-color: ${({ isHover }) => (isHover ? 'purple' : 'gray')};
+  transform: translateY(${({ isHover }) => (isHover ? -100 : 100)}%);
+  transition: transform 500ms linear;
+`;
+const StyledBorderInCardRight = styled.div<StyledBorderInCardProps>`
+  width: 2px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  // TODO
+  background-color: ${({ isHover }) => (isHover ? 'purple' : 'gray')};
+  transform: translateY(${({ isHover }) => (isHover ? 100 : -100)}%);
+  transition: transform 500ms linear;
+`;
+const StyledBorderInCardTop = styled.div<StyledBorderInCardProps>`
+  width: 100%;
+  height: 2px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  // TODO
+  background-color: ${({ isHover }) => (isHover ? 'purple' : 'gray')};
+  transform: translateX(${({ isHover }) => (isHover ? 100 : -100)}%);
+  transition: transform 500ms linear;
+`;
+const StyledBorderInCardBottom = styled.div<StyledBorderInCardProps>`
+  width: 100%;
+  height: 2px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  // TODO
+  background-color: ${({ isHover }) => (isHover ? 'purple' : 'gray')};
+  transform: translateX(${({ isHover }) => (isHover ? -100 : 100)}%);
+  transition: transform 500ms linear;
 `;
 
 const ChooseCharacter: React.FC = () => {
+  const [isHover, setHover] = useState(false);
   return (
     <StyledContainer>
       <StyledCardContainer>
-        <StyledCard>
-          <StyledImageInCard leftRatio={-80} src={imageAim} alt="愛夢" />
+        <StyledCard
+          onMouseOver={() => setHover(true)}
+          onMouseLeave={() => setHover(false)}
+        >
+          <StyledImageInCard
+            leftRatio={-80}
+            isHover={isHover}
+            src={imageAim}
+            alt="愛夢"
+          />
+          <StyledBorderInCardLeft isHover={isHover} />
+          <StyledBorderInCardRight isHover={isHover} />
+          <StyledBorderInCardTop isHover={isHover} />
+          <StyledBorderInCardBottom isHover={isHover} />
         </StyledCard>
         <StyledCard>coming soon</StyledCard>
         <StyledCard>coming soon</StyledCard>
