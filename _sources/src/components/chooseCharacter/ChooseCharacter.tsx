@@ -24,6 +24,7 @@ const StyledContainer = styled.div<StyledContainerProps>`
   @media screen and (max-width: ${BREAK_POINT}px) {
     height: calc(100vh - ${HEADER_HEIGHT_FOR_SP}px);
     padding-top: 0;
+    transform: none;
   }
 `;
 
@@ -47,7 +48,7 @@ const ChooseCharacter: React.FC<Props> = ({ onSelected }) => {
   return (
     <StyledContainer
       readyToHide={!!selectedCharacter.current && readyToHide}
-      onTransitionEnd={(e) => {
+      onTransitionEnd={() => {
         if (!readyToHide || calledOnSelected.current) return;
         selectedCharacter.current && onSelected(selectedCharacter.current);
         calledOnSelected.current = true;

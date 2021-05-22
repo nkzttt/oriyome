@@ -17,12 +17,12 @@ const StyledContainer = styled.div`
 
 const StyledTitle = styled.h1`
   padding: ${createSpaceSize(3)}px;
-  border-bottom: solid 1px ${({ theme }) => theme.thin};
+  background-color: ${({ theme }) => theme.thinner};
   color: ${({ theme }) => theme.thin};
   font-size: ${SIZE_FONT_LARGE}px;
   font-weight: normal;
   transition: all 600ms ease-out;
-  transition-property: border-bottom-color, color;
+  transition-property: background-color, color;
   @media screen and (max-width: ${BREAK_POINT}px) {
     height: ${HEADER_HEIGHT_FOR_SP}px;
     line-height: ${HEADER_HEIGHT_FOR_SP}px;
