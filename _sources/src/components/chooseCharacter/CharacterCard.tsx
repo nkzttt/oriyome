@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import 'ress';
 import styled, { keyframes } from 'styled-components';
 import { CheckCircle } from '@styled-icons/boxicons-regular/CheckCircle';
 import baseTheme from '../../theme/gray.json';

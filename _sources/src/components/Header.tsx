@@ -1,5 +1,4 @@
 import React from 'react';
-import 'ress';
 import styled from 'styled-components';
 import baseTheme from '../theme/gray.json';
 import {
