@@ -1,20 +1,21 @@
 {
   "files": {
-    "main.js": "/oriyome/static/js/main.9fd29cbf.chunk.js",
-    "main.js.map": "/oriyome/static/js/main.9fd29cbf.chunk.js.map",
+    "main.js": "/oriyome/static/js/main.941c7e4f.chunk.js",
+    "main.js.map": "/oriyome/static/js/main.941c7e4f.chunk.js.map",
     "runtime-main.js": "/oriyome/static/js/runtime-main.f998c92a.js",
     "runtime-main.js.map": "/oriyome/static/js/runtime-main.f998c92a.js.map",
     "static/css/2.d1db154c.chunk.css": "/oriyome/static/css/2.d1db154c.chunk.css",
-    "static/js/2.c1b4a27f.chunk.js": "/oriyome/static/js/2.c1b4a27f.chunk.js",
-    "static/js/2.c1b4a27f.chunk.js.map": "/oriyome/static/js/2.c1b4a27f.chunk.js.map",
+    "static/js/2.a644b6df.chunk.js": "/oriyome/static/js/2.a644b6df.chunk.js",
+    "static/js/2.a644b6df.chunk.js.map": "/oriyome/static/js/2.a644b6df.chunk.js.map",
     "index.html": "/oriyome/index.html",
     "static/css/2.d1db154c.chunk.css.map": "/oriyome/static/css/2.d1db154c.chunk.css.map",
-    "static/js/2.c1b4a27f.chunk.js.LICENSE.txt": "/oriyome/static/js/2.c1b4a27f.chunk.js.LICENSE.txt"
+    "static/js/2.a644b6df.chunk.js.LICENSE.txt": "/oriyome/static/js/2.a644b6df.chunk.js.LICENSE.txt",
+    "static/media/aim.5536ca15.jpg": "/oriyome/static/media/aim.5536ca15.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.f998c92a.js",
     "static/css/2.d1db154c.chunk.css",
-    "static/js/2.c1b4a27f.chunk.js",
-    "static/js/main.9fd29cbf.chunk.js"
+    "static/js/2.a644b6df.chunk.js",
+    "static/js/main.941c7e4f.chunk.js"
   ]
 }
