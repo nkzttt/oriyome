@@ -1,7 +1,11 @@
 import React, { useRef, useState } from 'react';
 import 'ress';
 import styled from 'styled-components';
-import { createSpaceSize } from '../../lib/styleUtils';
+import {
+  BREAK_POINT,
+  createSpaceSize,
+  HEADER_HEIGHT_FOR_SP,
+} from '../../lib/styleUtils';
 import themeAim from '../../theme/aim.json';
 import imageAim from '../../images/choose/aim.jpg';
 import CharacterCard from './CharacterCard';
@@ -17,10 +21,18 @@ const StyledContainer = styled.div<StyledContainerProps>`
   transform: scale(${({ readyToHide }) => (readyToHide ? 1.05 : 1)});
   transition: all 600ms ease-out;
   transition-property: opacity, transform;
+  @media screen and (max-width: ${BREAK_POINT}px) {
+    height: calc(100vh - ${HEADER_HEIGHT_FOR_SP}px);
+    padding-top: 0;
+  }
 `;
 
 const StyledCardContainer = styled.div`
   display: flex;
+  @media screen and (max-width: ${BREAK_POINT}px) {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 type CHARACTER = 'aim';
@@ -43,7 +55,7 @@ const ChooseCharacter: React.FC<Props> = ({ onSelected }) => {
     >
       <StyledCardContainer>
         <CharacterCard
-          leftRatio={-80}
+          leftRatio={[-80, -156]}
           characterTheme={themeAim}
           onSelected={() => {
             setReadyToHide(true);

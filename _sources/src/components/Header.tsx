@@ -3,8 +3,11 @@ import 'ress';
 import styled from 'styled-components';
 import baseTheme from '../theme/gray.json';
 import {
+  BREAK_POINT,
   createSpaceSize,
+  HEADER_HEIGHT_FOR_SP,
   SIZE_FONT_LARGE,
+  SIZE_FONT_MINIMUM,
   SIZE_FONT_SMALL,
 } from '../lib/styleUtils';
 
@@ -20,6 +23,13 @@ const StyledTitle = styled.h1`
   font-weight: normal;
   transition: all 600ms ease-out;
   transition-property: border-bottom-color, color;
+  @media screen and (max-width: ${BREAK_POINT}px) {
+    height: ${HEADER_HEIGHT_FOR_SP}px;
+    line-height: ${HEADER_HEIGHT_FOR_SP}px;
+    padding: 0;
+    padding-left: ${createSpaceSize(2)}px;
+    font-size: ${SIZE_FONT_SMALL}px;
+  }
 `;
 
 const StyledRightContainer = styled.div`
@@ -35,6 +45,9 @@ const StyledRightContainer = styled.div`
 const StyledCopyright = styled.p`
   color: ${baseTheme.thin};
   font-size: ${SIZE_FONT_SMALL}px;
+  @media screen and (max-width: ${BREAK_POINT}px) {
+    font-size: ${SIZE_FONT_MINIMUM}px;
+  }
 `;
 
 const StyledCopyrightIcon = styled.span`

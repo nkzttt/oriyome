@@ -2,6 +2,7 @@ export const SIZE_FONT_XX_LARGE = 24;
 export const SIZE_FONT_LARGE = 18;
 export const SIZE_FONT_MEDIUM = 16;
 export const SIZE_FONT_SMALL = 14;
+export const SIZE_FONT_MINIMUM = 12;
 
 export const MINIMUM_PIXEL_UNIT = 8;
 
@@ -18,3 +19,6 @@ export const convertHexToRGB = (hex: string, alpha?: number) => {
     return `rgb(${r}, ${g}, ${b})`;
   }
 };
+
+export const BREAK_POINT = 599;
+export const HEADER_HEIGHT_FOR_SP = 6 * MINIMUM_PIXEL_UNIT;

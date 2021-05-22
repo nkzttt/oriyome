@@ -3,7 +3,11 @@ import 'ress';
 import styled, { keyframes } from 'styled-components';
 import { CheckCircle } from '@styled-icons/boxicons-regular/CheckCircle';
 import baseTheme from '../../theme/gray.json';
-import { createSpaceSize, SIZE_FONT_XX_LARGE } from '../../lib/styleUtils';
+import {
+  BREAK_POINT,
+  createSpaceSize,
+  SIZE_FONT_XX_LARGE,
+} from '../../lib/styleUtils';
 
 type Theme = typeof baseTheme;
 
@@ -27,6 +31,15 @@ const StyledCard = styled.div<StyledCardProps>`
       rgba(0, 0, 0, 0.03) ${(CARD_WIDTH + createSpaceSize(6)) * 2}px 0,
       rgba(0, 0, 0, 0.02) ${(CARD_WIDTH + createSpaceSize(6)) * 3}px 0;
   }
+  @media screen and (max-width: ${BREAK_POINT}px) {
+    width: 33.333%;
+    height: 100%;
+    margin: 0;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    &:nth-child(3n) {
+      width: 33.334%;
+    }
+  }
 `;
 
 const StyledComingSoon = styled.div`
@@ -37,24 +50,28 @@ const StyledComingSoon = styled.div`
   justify-content: center;
   color: ${baseTheme.thin};
   font-size: ${SIZE_FONT_XX_LARGE}px;
+  text-align: center;
   transform: rotate(-20deg);
 `;
 
 type StyledImageInCardProps = {
-  leftRatio: number;
+  leftRatio: [forPc: number, forSp: number];
   isHover: boolean;
   selected: boolean;
 };
 const StyledImageInCard = styled.img<StyledImageInCardProps>`
   position: absolute;
   top: 0;
-  left: ${({ leftRatio }) => leftRatio || -50}%;
+  left: ${({ leftRatio }) => leftRatio[0]}%;
   width: auto;
   height: 100%;
   filter: grayscale(
     ${({ isHover, selected }) => (isHover || selected ? 0 : 1)}
   );
   transition: filter 350ms linear;
+  @media screen and (max-width: ${BREAK_POINT}px) {
+    left: ${({ leftRatio }) => leftRatio[1]}%;
+  }
 `;
 
 const BORDER_PROPERTIES = {
@@ -145,7 +162,11 @@ const fadeInOut = keyframes`
 `;
 const StyledSelectedContainer = styled.div`
   text-align: center;
+  opacity: 0;
   animation: ${fadeInOut} 1200ms ease-in-out forwards;
+  @media screen and (max-width: ${BREAK_POINT}px) {
+    animation-delay: 500ms;
+  }
 `;
 type StyledSelectedIconProps = { characterTheme: Theme };
 const StyledSelectedIcon = styled(CheckCircle)<StyledSelectedIconProps>`
@@ -163,7 +184,7 @@ const StyledSelectedLabel = styled.p<StyledSelectedLabelProps>`
 type Props =
   | { isComingSoon: true }
   | (React.ImgHTMLAttributes<HTMLImageElement> & {
-      leftRatio: number;
+      leftRatio: [forPc: number, forSp: number];
       characterTheme: Theme;
       onSelected: () => void;
     });
