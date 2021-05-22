@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import 'ress';
 import styled from 'styled-components';
 import { createSpaceSize } from '../../lib/styleUtils';
@@ -23,20 +23,31 @@ const StyledCardContainer = styled.div`
   display: flex;
 `;
 
+type CHARACTER = 'aim';
+
 type Props = {
-  onSelected: (character: 'aim') => void;
+  onSelected: (character: CHARACTER) => void;
 };
 const ChooseCharacter: React.FC<Props> = ({ onSelected }) => {
   const [readyToHide, setReadyToHide] = useState(false);
+  const selectedCharacter = useRef<CHARACTER | null>(null);
+  const calledOnSelected = useRef<boolean>(false);
   return (
-    <StyledContainer readyToHide={readyToHide}>
+    <StyledContainer
+      readyToHide={!!selectedCharacter.current && readyToHide}
+      onTransitionEnd={(e) => {
+        if (!readyToHide || calledOnSelected.current) return;
+        selectedCharacter.current && onSelected(selectedCharacter.current);
+        calledOnSelected.current = true;
+      }}
+    >
       <StyledCardContainer>
         <CharacterCard
           leftRatio={-80}
           characterTheme={themeAim}
           onSelected={() => {
             setReadyToHide(true);
-            onSelected('aim');
+            selectedCharacter.current = 'aim';
           }}
           src={imageAim}
           alt="愛夢"
