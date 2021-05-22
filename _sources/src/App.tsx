@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
 import 'ress';
-import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import baseTheme from './theme/gray.json';
 import aimTheme from './theme/aim.json';
+import Header from './components/Header';
 import ChooseCharacter from './components/chooseCharacter/ChooseCharacter';
-import {
-  createSpaceSize,
-  SIZE_FONT_LARGE,
-  SIZE_FONT_MEDIUM,
-} from './lib/styleUtils';
+import { SIZE_FONT_MEDIUM } from './lib/styleUtils';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -17,16 +14,6 @@ const GlobalStyle = createGlobalStyle`
     color: ${baseTheme.thick};
     font-size: ${SIZE_FONT_MEDIUM}px;
   }
-`;
-
-const StyledTitle = styled.h1`
-  padding: ${createSpaceSize(3)}px;
-  border-bottom: solid 1px ${({ theme }) => theme.thin};
-  color: ${({ theme }) => theme.thin};
-  font-size: ${SIZE_FONT_LARGE}px;
-  font-weight: normal;
-  transition: all 600ms ease-out;
-  transition-property: border-bottom-color, color;
 `;
 
 type Scene = 'choice' | 'dummy';
@@ -38,7 +25,7 @@ const App: React.FC = () => {
     <div>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-        <StyledTitle>オリ嫁ブランディング</StyledTitle>
+        <Header />
         {scene === 'choice' && (
           <ChooseCharacter
             onSelected={(character) => {
