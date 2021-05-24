@@ -21,4 +21,5 @@ export const convertHexToRGB = (hex: string, alpha?: number) => {
 };
 
 export const BREAK_POINT = 599;
+export const HEADER_HEIGHT_FOR_PC = 9 * MINIMUM_PIXEL_UNIT;
 export const HEADER_HEIGHT_FOR_SP = 6 * MINIMUM_PIXEL_UNIT;

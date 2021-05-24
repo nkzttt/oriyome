@@ -23,14 +23,32 @@ const CHARACTER_THEMES = {
 
 type Scene = 'choice' | 'aim';
 
+const getCharacterName = (scene: Scene) => {
+  switch (scene) {
+    case 'aim':
+      return '愛夢';
+    case 'choice':
+      return undefined;
+  }
+};
+
 const App: React.FC = () => {
-  const [theme, setTheme] = useState<typeof baseTheme>(baseTheme);
-  const [scene, setScene] = useState<Scene>('choice');
+  // TODO: 戻す
+  const [theme, setTheme] = useState<typeof baseTheme>(aimTheme);
+  const [scene, setScene] = useState<Scene>('aim');
+  // const [theme, setTheme] = useState<typeof baseTheme>(baseTheme);
+  // const [scene, setScene] = useState<Scene>('choice');
+  const [backToChoice, setBackToChoice] = useState(false);
   return (
     <div>
       <GlobalStyle />
       <ThemeProvider theme={theme}>
-        <Header />
+        <Header
+          characterName={getCharacterName(scene)}
+          onPressTitle={() => {
+            setBackToChoice(true);
+          }}
+        />
         {scene === 'choice' && (
           <ChooseCharacter
             onSelected={(character) => {
@@ -39,7 +57,16 @@ const App: React.FC = () => {
             }}
           />
         )}
-        {scene === 'aim' && <Aim />}
+        {scene === 'aim' && (
+          <Aim
+            backToChoice={backToChoice}
+            onSceneOutForBackToChoice={() => {
+              setTheme(baseTheme);
+              setScene('choice');
+              setBackToChoice(false);
+            }}
+          />
+        )}
       </ThemeProvider>
     </div>
   );
