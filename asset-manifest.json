@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/oriyome/static/js/main.bab76995.chunk.js",
-    "main.js.map": "/oriyome/static/js/main.bab76995.chunk.js.map",
+    "main.js": "/oriyome/static/js/main.af9b6e23.chunk.js",
+    "main.js.map": "/oriyome/static/js/main.af9b6e23.chunk.js.map",
     "runtime-main.js": "/oriyome/static/js/runtime-main.f998c92a.js",
     "runtime-main.js.map": "/oriyome/static/js/runtime-main.f998c92a.js.map",
     "static/css/2.d1db154c.chunk.css": "/oriyome/static/css/2.d1db154c.chunk.css",
@@ -16,6 +16,6 @@
     "static/js/runtime-main.f998c92a.js",
     "static/css/2.d1db154c.chunk.css",
     "static/js/2.a8143d71.chunk.js",
-    "static/js/main.bab76995.chunk.js"
+    "static/js/main.af9b6e23.chunk.js"
   ]
 }

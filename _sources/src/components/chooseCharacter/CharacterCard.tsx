@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { CheckCircle } from '@styled-icons/boxicons-regular/CheckCircle';
 import baseTheme from '../../theme/gray.json';
@@ -190,10 +190,28 @@ type Props =
       leftRatio: [forPc: number, forSp: number];
       characterTheme: Theme;
       onSelected: () => void;
+      shouldHighlight?: boolean;
+      highlightDelay?: number;
     });
 const CharacterCard: React.FC<Props> = (props) => {
   const [isHover, setHover] = useState(false);
   const [selected, setSelected] = useState(false);
+  useEffect(() => {
+    if ('isComingSoon' in props) return;
+    if (!props.shouldHighlight) return;
+    const showTimer = setTimeout(
+      () => setHover(true),
+      props.highlightDelay || 0
+    );
+    const hideTimer = setTimeout(
+      () => setHover(false),
+      (props.highlightDelay || 0) + BORDER_PROPERTIES.transitionTime + 100
+    );
+    return () => {
+      clearTimeout(showTimer);
+      clearTimeout(hideTimer);
+    };
+  }, [props]);
   if ('isComingSoon' in props) {
     return (
       <StyledCard isComingSoon>

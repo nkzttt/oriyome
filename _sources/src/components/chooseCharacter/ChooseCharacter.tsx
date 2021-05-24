@@ -37,11 +37,13 @@ type Props = {
   onSelected: (character: CHARACTER) => void;
 };
 const ChooseCharacter: React.FC<Props> = ({ onSelected }) => {
+  const [shouldHighlight, setShouldHighlight] = useState(false);
   const [readyToHide, setReadyToHide] = useState(false);
   const selectedCharacter = useRef<CHARACTER | null>(null);
   return (
     <SceneInOut
       readyToHide={!!selectedCharacter.current && readyToHide}
+      onSceneIn={() => setShouldHighlight(true)}
       onSceneOut={() =>
         selectedCharacter.current && onSelected(selectedCharacter.current)
       }
@@ -57,6 +59,7 @@ const ChooseCharacter: React.FC<Props> = ({ onSelected }) => {
             }}
             src={imageAim}
             alt="愛夢"
+            shouldHighlight={shouldHighlight}
           />
           <CharacterCard isComingSoon />
           <CharacterCard isComingSoon />

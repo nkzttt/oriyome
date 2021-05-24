@@ -9,7 +9,7 @@ import { SIZE_FONT_MEDIUM } from './lib/styleUtils';
 
 const GlobalStyle = createGlobalStyle`
   body {
-    font-family:"ヒラギノ丸ゴ Pro W4","ヒラギノ丸ゴ Pro","Hiragino Maru Gothic Pro","ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","HG丸ｺﾞｼｯｸM-PRO","HGMaruGothicMPRO";
+    font-family:'ヒラギノ丸ゴ Pro W4','ヒラギノ丸ゴ Pro','Hiragino Maru Gothic Pro','ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','HG丸ｺﾞｼｯｸM-PRO','HGMaruGothicMPRO';
     background-color: #f7f7f7;
     color: ${baseTheme.thick};
     font-size: ${SIZE_FONT_MEDIUM}px;
