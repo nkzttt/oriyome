@@ -33,11 +33,8 @@ const getCharacterName = (scene: Scene) => {
 };
 
 const App: React.FC = () => {
-  // TODO: 戻す
-  const [theme, setTheme] = useState<typeof baseTheme>(aimTheme);
-  const [scene, setScene] = useState<Scene>('aim');
-  // const [theme, setTheme] = useState<typeof baseTheme>(baseTheme);
-  // const [scene, setScene] = useState<Scene>('choice');
+  const [theme, setTheme] = useState<typeof baseTheme>(baseTheme);
+  const [scene, setScene] = useState<Scene>('choice');
   const [backToChoice, setBackToChoice] = useState(false);
   return (
     <div>
