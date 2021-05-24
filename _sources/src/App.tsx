@@ -5,6 +5,7 @@ import baseTheme from './theme/gray.json';
 import aimTheme from './theme/aim.json';
 import Header from './components/Header';
 import ChooseCharacter from './components/chooseCharacter/ChooseCharacter';
+import Aim from './components/aim/Aim';
 import { SIZE_FONT_MEDIUM } from './lib/styleUtils';
 
 const GlobalStyle = createGlobalStyle`
@@ -16,7 +17,11 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-type Scene = 'choice' | 'dummy';
+const CHARACTER_THEMES = {
+  aim: aimTheme,
+};
+
+type Scene = 'choice' | 'aim';
 
 const App: React.FC = () => {
   const [theme, setTheme] = useState<typeof baseTheme>(baseTheme);
@@ -29,16 +34,12 @@ const App: React.FC = () => {
         {scene === 'choice' && (
           <ChooseCharacter
             onSelected={(character) => {
-              switch (character) {
-                case 'aim':
-                  setTheme(aimTheme);
-                  break;
-              }
-              setScene('dummy');
+              setTheme(CHARACTER_THEMES[character]);
+              setScene(character);
             }}
           />
         )}
-        {scene === 'dummy' && <p>next contents</p>}
+        {scene === 'aim' && <Aim />}
       </ThemeProvider>
     </div>
   );
