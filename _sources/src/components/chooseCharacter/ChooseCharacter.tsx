@@ -25,6 +25,7 @@ const StyledContainer = styled.div`
 const StyledCardContainer = styled.div`
   display: flex;
   @media screen and (max-width: ${BREAK_POINT}px) {
+    flex-wrap: wrap;
     width: 100%;
     height: 100%;
   }
@@ -48,7 +49,7 @@ const ChooseCharacter: React.FC<Props> = ({ onSelected }) => {
       <StyledContainer>
         <StyledCardContainer>
           <CharacterCard
-            leftRatio={[-80, -156]}
+            leftRatio={[-35, -12]}
             characterTheme={themeAim}
             onSelected={() => {
               setReadyToHide(true);

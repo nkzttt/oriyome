@@ -10,10 +10,10 @@ import {
 
 type Theme = typeof baseTheme;
 
-const CARD_WIDTH = 150;
+const CARD_WIDTH_FOR_PC = 150;
 type StyledCardProps = { isComingSoon?: boolean };
 const StyledCard = styled.div<StyledCardProps>`
-  width: ${CARD_WIDTH}px;
+  width: ${CARD_WIDTH_FOR_PC}px;
   height: 500px;
   position: relative;
   margin: 0 ${createSpaceSize(3)}px;
@@ -21,22 +21,25 @@ const StyledCard = styled.div<StyledCardProps>`
   cursor: ${({ isComingSoon }) => (isComingSoon ? 'auto' : 'pointer')};
   overflow: hidden;
   &:first-child {
-    box-shadow: rgba(0, 0, 0, 0.05) -${CARD_WIDTH + createSpaceSize(6)}px 0,
-      rgba(0, 0, 0, 0.03) -${(CARD_WIDTH + createSpaceSize(6)) * 2}px 0,
-      rgba(0, 0, 0, 0.02) -${(CARD_WIDTH + createSpaceSize(6)) * 3}px 0;
+    box-shadow: rgba(0, 0, 0, 0.05) -${CARD_WIDTH_FOR_PC + createSpaceSize(6)}px
+        0,
+      rgba(0, 0, 0, 0.03) -${(CARD_WIDTH_FOR_PC + createSpaceSize(6)) * 2}px 0,
+      rgba(0, 0, 0, 0.02) -${(CARD_WIDTH_FOR_PC + createSpaceSize(6)) * 3}px 0;
   }
   &:last-child {
-    box-shadow: rgba(0, 0, 0, 0.05) ${CARD_WIDTH + createSpaceSize(6)}px 0,
-      rgba(0, 0, 0, 0.03) ${(CARD_WIDTH + createSpaceSize(6)) * 2}px 0,
-      rgba(0, 0, 0, 0.02) ${(CARD_WIDTH + createSpaceSize(6)) * 3}px 0;
+    box-shadow: rgba(0, 0, 0, 0.05) ${CARD_WIDTH_FOR_PC + createSpaceSize(6)}px
+        0,
+      rgba(0, 0, 0, 0.03) ${(CARD_WIDTH_FOR_PC + createSpaceSize(6)) * 2}px 0,
+      rgba(0, 0, 0, 0.02) ${(CARD_WIDTH_FOR_PC + createSpaceSize(6)) * 3}px 0;
   }
   @media screen and (max-width: ${BREAK_POINT}px) {
-    width: 33.333%;
-    height: 100%;
+    width: 50%;
+    height: 50%;
     margin: 0;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    &:nth-child(3n) {
-      width: 33.334%;
+    &:first-child,
+    &:last-child {
+      box-shadow: none;
     }
   }
 `;
@@ -61,15 +64,16 @@ type StyledImageInCardProps = {
 const StyledImageInCard = styled.img<StyledImageInCardProps>`
   position: absolute;
   top: 0;
-  left: ${({ leftRatio }) => leftRatio[0]}%;
+  left: 0;
   width: auto;
   height: 100%;
+  transform: translateX(${({ leftRatio }) => leftRatio[0]}%);
   filter: grayscale(
     ${({ isHover, selected }) => (isHover || selected ? 0 : 1)}
   );
   transition: filter 350ms linear;
   @media screen and (max-width: ${BREAK_POINT}px) {
-    left: ${({ leftRatio }) => leftRatio[1]}%;
+    transform: translateX(${({ leftRatio }) => leftRatio[1]}%);
   }
 `;
 
