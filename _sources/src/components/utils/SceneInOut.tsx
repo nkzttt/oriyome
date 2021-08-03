@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { BREAK_POINT } from '../../lib/styleUtils';
+import { BREAK_POINT, convertHexToRGB } from '../../lib/styleUtils';
 
 type StyledContainerProps = { readyToShow?: boolean; readyToHide?: boolean };
 const getOpacity = (styledContainerProps: StyledContainerProps) => {
@@ -26,14 +26,18 @@ const StyledContainer = styled.div<StyledContainerProps>`
   transition: all 600ms ease-out;
   transition-property: opacity, transform;
   &::before {
-    content: "";
+    content: '';
     display: block;
     height: 15px;
     position: absolute;
     top: -15px;
     left: 0;
     right: 0;
-    background: linear-gradient(to top, ${({ theme }) => theme.thinner}, transparent);
+    background: linear-gradient(
+      to top,
+      ${({ theme }) => theme.thinner},
+      ${({ theme }) => convertHexToRGB(theme.thinner, 0)}
+    );
   }
   @media screen and (max-width: ${BREAK_POINT}px) {
     transform: translateY(${getTranslate});

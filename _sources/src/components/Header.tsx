@@ -4,6 +4,7 @@ import baseTheme from '../theme/gray.json';
 import {
   BREAK_POINT,
   createSpaceSize,
+  convertHexToRGB,
   HEADER_HEIGHT_FOR_PC,
   HEADER_HEIGHT_FOR_SP,
   SIZE_FONT_LARGE,
@@ -21,14 +22,18 @@ const StyledTitleContainer = styled.div`
   position: relative;
   background-color: ${({ theme }) => theme.thinner};
   &::after {
-    content: "";
+    content: '';
     display: block;
     height: 15px;
     position: absolute;
     bottom: -15px;
     left: 0;
     right: 0;
-    background: linear-gradient(to bottom, ${({ theme }) => theme.thinner}, transparent);
+    background: linear-gradient(
+      to bottom,
+      ${({ theme }) => theme.thinner},
+      ${({ theme }) => convertHexToRGB(theme.thinner, 0)}
+    );
   }
 `;
 
