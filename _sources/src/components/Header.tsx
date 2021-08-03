@@ -18,7 +18,18 @@ const StyledContainer = styled.div`
 const StyledTitleContainer = styled.div`
   display: flex;
   align-items: center;
+  position: relative;
   background-color: ${({ theme }) => theme.thinner};
+  &::after {
+    content: "";
+    display: block;
+    height: 15px;
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to bottom, ${({ theme }) => theme.thinner}, transparent);
+  }
 `;
 
 type StyledTitleProps = { isLink: boolean };

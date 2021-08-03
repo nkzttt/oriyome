@@ -13,14 +13,30 @@ const getScale = (styledContainerProps: StyledContainerProps) => {
   if (styledContainerProps.readyToShow) return 1;
   return 1.05;
 };
+const getTranslate = (styledContainerProps: StyledContainerProps) => {
+  if (styledContainerProps.readyToHide) return '15px';
+  if (styledContainerProps.readyToShow) return 0;
+  return '15px';
+};
 const StyledContainer = styled.div<StyledContainerProps>`
   width: 100%;
+  position: relative;
   opacity: ${getOpacity};
   transform: scale(${getScale});
   transition: all 600ms ease-out;
   transition-property: opacity, transform;
+  &::before {
+    content: "";
+    display: block;
+    height: 15px;
+    position: absolute;
+    top: -15px;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, ${({ theme }) => theme.thinner}, transparent);
+  }
   @media screen and (max-width: ${BREAK_POINT}px) {
-    transform: none;
+    transform: translateY(${getTranslate});
   }
 `;
 

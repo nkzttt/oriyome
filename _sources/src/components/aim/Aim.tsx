@@ -6,7 +6,6 @@ import {
   HEADER_HEIGHT_FOR_PC,
   HEADER_HEIGHT_FOR_SP,
   MINIMUM_PIXEL_UNIT,
-  SIZE_FONT_LARGE,
   SIZE_FONT_SMALL,
   SIZE_FONT_XX_LARGE,
 } from '../../lib/styleUtils';
