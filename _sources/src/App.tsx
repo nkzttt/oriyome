@@ -4,6 +4,7 @@ import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import baseTheme from './theme/gray.json';
 import aimTheme from './theme/aim.json';
 import Header from './components/Header';
+import Body from './components/Body';
 import ChooseCharacter from './components/chooseCharacter/ChooseCharacter';
 import Aim from './components/aim/Aim';
 import { SIZE_FONT_MEDIUM } from './lib/styleUtils';
@@ -11,7 +12,7 @@ import { SIZE_FONT_MEDIUM } from './lib/styleUtils';
 const GlobalStyle = createGlobalStyle`
   body {
     font-family:'ヒラギノ丸ゴ Pro W4','ヒラギノ丸ゴ Pro','Hiragino Maru Gothic Pro','ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','HG丸ｺﾞｼｯｸM-PRO','HGMaruGothicMPRO';
-    background-color: #f7f7f7;
+    background-color: ${baseTheme.thinner};
     color: ${baseTheme.thick};
     font-size: ${SIZE_FONT_MEDIUM}px;
   }
@@ -46,24 +47,26 @@ const App: React.FC = () => {
             setBackToChoice(true);
           }}
         />
-        {scene === 'choice' && (
-          <ChooseCharacter
-            onSelected={(character) => {
-              setTheme(CHARACTER_THEMES[character]);
-              setScene(character);
-            }}
-          />
-        )}
-        {scene === 'aim' && (
-          <Aim
-            backToChoice={backToChoice}
-            onSceneOutForBackToChoice={() => {
-              setTheme(baseTheme);
-              setScene('choice');
-              setBackToChoice(false);
-            }}
-          />
-        )}
+        <Body>
+          {scene === 'choice' && (
+            <ChooseCharacter
+              onSelected={(character) => {
+                setTheme(CHARACTER_THEMES[character]);
+                setScene(character);
+              }}
+            />
+          )}
+          {scene === 'aim' && (
+            <Aim
+              backToChoice={backToChoice}
+              onSceneOutForBackToChoice={() => {
+                setTheme(baseTheme);
+                setScene('choice');
+                setBackToChoice(false);
+              }}
+            />
+          )}
+        </Body>
       </ThemeProvider>
     </div>
   );

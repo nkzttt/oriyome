@@ -4,7 +4,6 @@ import baseTheme from '../theme/gray.json';
 import {
   BREAK_POINT,
   createSpaceSize,
-  convertHexToRGB,
   HEADER_HEIGHT_FOR_PC,
   HEADER_HEIGHT_FOR_SP,
   SIZE_FONT_LARGE,
@@ -19,22 +18,8 @@ const StyledContainer = styled.div`
 const StyledTitleContainer = styled.div`
   display: flex;
   align-items: center;
-  position: relative;
   background-color: ${({ theme }) => theme.thinner};
-  &::after {
-    content: '';
-    display: block;
-    height: 15px;
-    position: absolute;
-    bottom: -15px;
-    left: 0;
-    right: 0;
-    background: linear-gradient(
-      to bottom,
-      ${({ theme }) => theme.thinner},
-      ${({ theme }) => convertHexToRGB(theme.thinner, 0)}
-    );
-  }
+  transition: background-color 600ms ease-out;
 `;
 
 type StyledTitleProps = { isLink: boolean };
@@ -46,8 +31,7 @@ const StyledTitle = styled.h1<StyledTitleProps>`
   font-size: ${SIZE_FONT_LARGE}px;
   font-weight: normal;
   cursor: ${({ isLink }) => (isLink ? 'pointer' : 'default')};
-  transition: all 600ms ease-out;
-  transition-property: background-color, color;
+  transition: color 600ms ease-out;
   @media screen and (max-width: ${BREAK_POINT}px) {
     height: ${HEADER_HEIGHT_FOR_SP}px;
     line-height: ${HEADER_HEIGHT_FOR_SP}px;
