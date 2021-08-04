@@ -26,7 +26,7 @@ type Scene = 'choice' | 'aim';
 const getCharacterName = (scene: Scene) => {
   switch (scene) {
     case 'aim':
-      return '愛夢';
+      return 'あいむ';
     case 'choice':
       return undefined;
   }

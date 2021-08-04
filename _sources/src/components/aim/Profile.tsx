@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import {
   BREAK_POINT,
   createSpaceSize,
-  HEADER_HEIGHT_FOR_SP,
   MINIMUM_PIXEL_UNIT,
   SIZE_FONT_XX_LARGE,
 } from '../../lib/styleUtils';
 import imageAim from '../../images/choose/aim.jpg';
+import BorderText from '../utils/BorderText';
 
 const StyledContainer = styled.div`
   display: flex;
@@ -43,6 +43,7 @@ const StyledBodyContainer = styled.div`
 const StyledWord = styled.p`
   margin-bottom: ${createSpaceSize(3)}px;
   font-size: ${SIZE_FONT_XX_LARGE}px;
+  letter-spacing: 1.2px;
 `;
 const StyledProfile = styled.ul`
   list-style: none;
@@ -60,7 +61,9 @@ const Profile: React.FC<Props> = () => (
   <StyledContainer>
     <StyledCharacterImage src={imageAim} alt="愛夢" />
     <StyledBodyContainer>
-      <StyledWord>「ありがとう。今日もお疲れ様でした。」</StyledWord>
+      <BorderText>
+        <StyledWord>「ありがとう。今日もお疲れ様でした。」</StyledWord>
+      </BorderText>
       <StyledProfile>
         <StyledProfileItem>名前：愛夢（あいむ / Aim）</StyledProfileItem>
         <StyledProfileItem>年齢：23歳</StyledProfileItem>

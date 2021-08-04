@@ -65,7 +65,10 @@ const StyledConnectingText = styled.p`
 `;
 
 const StyledCharacterName = styled.p`
+  position: relative;
+  z-index: 1;
   color: ${({ theme }) => theme.thick};
+  font-size: ${SIZE_FONT_LARGE}px;
   @media screen and (max-width: ${BREAK_POINT}px) {
     font-size: ${SIZE_FONT_SMALL}px;
   }
@@ -79,6 +82,9 @@ const StyledRightContainer = styled.div`
   display: flex;
   align-items: center;
   padding: 0 ${createSpaceSize(3)}px;
+  @media screen and (max-width: ${BREAK_POINT}px) {
+    padding: 0 ${createSpaceSize(2)}px;
+  }
 `;
 
 const StyledCopyright = styled.p`
